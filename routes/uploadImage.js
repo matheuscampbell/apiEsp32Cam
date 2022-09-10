@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { exec } = require("child_process");
+var db = require('../bin/dbFunctions');
 
 const msRest = require("@azure/ms-rest-js");
 const Face = require("@azure/cognitiveservices-face");
@@ -14,8 +15,8 @@ const client = new Face.FaceClient(credentials, endpoint);
 
 
 
-router.post('/:depositId', function(req, res, next) {
-  var  depositId = req.params.depositId;
+router.post('/:departmentId', function(req, res, next) {
+  var  depositId = req.params.departmentId;
   var uniqueId = Date.now();
   const { imageFile } = req.files;
   if (!imageFile) return res.sendStatus(400);
