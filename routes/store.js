@@ -15,7 +15,7 @@ const client = new Face.FaceClient(credentials, endpoint);
 
 
 
-router.post('/:departmentId', function(req, res, next) {
+router.post('/user-image-upload/:idUser', function(req, res, next) {
   var  depositId = req.params.departmentId;
   var uniqueId = Date.now();
   const { imageFile } = req.files;
@@ -24,7 +24,8 @@ router.post('/:departmentId', function(req, res, next) {
   imageFile.mv(fileName);
   exec("python ./python/faceDetection.py " +fileName, (error, stdout, stderr) => {
     console.log(`stdout: ${stdout}`);
-    res.send('ok');
+    db.
+     res.send(stdout);
   });
 });
 
