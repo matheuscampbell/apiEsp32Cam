@@ -1,11 +1,20 @@
 import face_recognition
 import sys
-picture_of_me = face_recognition.load_image_file(sys.argv[1])
-my_face_encoding = face_recognition.face_encodings(picture_of_me)[0]
+import json
 
-picture_of_me2 = face_recognition.load_image_file(sys.argv[2])
-my_face_encoding2 = face_recognition.face_encodings(picture_of_me2)[0]
+# json to array conversion
 
-results = face_recognition.compare_faces([my_face_encoding], my_face_encoding2)
+allFaces = json.loads(sys.argv[1])
+faceToRecognition = json.loads(sys.argv[2])
+tolerance = float(sys.argv[3])
 
-print(results)
+
+
+results = face_recognition.compare_faces(allFaces, faceToRecognition, tolerance)
+
+# find the index of the first match
+if True in results:
+    sys.exit(results.index(True))
+else:
+    sys.exit(False)
+

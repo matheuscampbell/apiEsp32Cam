@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3d4b0d4-1783-4979-a008-8983da77665b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ft1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ft2.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/faceRecognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/faceRecognition.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +82,7 @@
       <updated>1662764047330</updated>
       <workItem from="1662764058893" duration="2550000" />
       <workItem from="1662768744202" duration="307000" />
-      <workItem from="1666925253466" duration="1976000" />
+      <workItem from="1666925253466" duration="2485000" />
     </task>
     <servers />
   </component>
