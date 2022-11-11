@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const { exec } = require("child_process");
-var db = require('../bin/dbFunctions');
+const fs = require('fs');
+const modelDispositivo = require('../model/Dispositivos');
+const modelReconhecimento = require('../model/Reconhecimentos');
 
 const msRest = require("@azure/ms-rest-js");
 const Face = require("@azure/cognitiveservices-face");
@@ -15,17 +17,28 @@ const client = new Face.FaceClient(credentials, endpoint);
 
 
 
-router.post('/:departmentId', function(req, res, next) {
-  var  depositId = req.params.departmentId;
-  var uniqueId = Date.now();
-  const { imageFile } = req.files;
-  if (!imageFile) return res.sendStatus(400);
-  var fileName = __dirname+'/'+depositId+'-'+uniqueId+ imageFile.name;
-  imageFile.mv(fileName);
-  exec("python ./python/faceDetection.py " +fileName, (error, stdout, stderr) => {
-    console.log(`stdout: ${stdout}`);
-    res.send('ok');
-  });
+router.post('/:idDispositivo', async function(req, res, next) {
+  var  idDispositivo = req.params.idDispositivo;
+  var [dispositivo] = await modelDispositivo.getDispositivoByMac(idDispositivo);
+  if(dispositivo) {
+    var uniqueId = Date.now();
+    const {imageFile} = req.files;
+    if (!imageFile) return res.sendStatus(400);
+    var imageName = idDispositivo + '-' + uniqueId + imageFile.name;
+    var fileName = __dirname.replace('routes', '') + '/public/images/' + imageName;
+    imageFile.mv(fileName);
+      exec("python ./python/faceDetection.py " + fileName, async (error, stdout, stderr) => {
+      console.log(`stdout: ${stdout}`);
+      if (stdout == "false") {
+        fs.unlinkSync(fileName);
+      } else {
+        await modelReconhecimento.addReconhecimento(dispositivo.id,dispositivo.loja, dispositivo.produto, dispositivo.department, imageName);
+      }
+      res.send('ok');
+    });
+  } else {
+    res.send('error');
+  }
 });
 
 

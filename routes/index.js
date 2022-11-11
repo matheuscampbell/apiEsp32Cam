@@ -1,18 +1,25 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../bin/dataBaseConn');
+var clientModel = require('../model/users');
+var dbconfig = require('../model/Conn');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
   res.render('index', { title: 'Express' });
 });
 
+router.get('/images/:image', function(req, res, next) {
+    var image = req.params.image;
+    res.sendFile(__dirname + './public/images/' + image);
+});
+
+
+
 router.get('/db', async function(req, res, next) {
-  await db.query('SELECT * FROM users', function (error, results, fields) {
-    if (error) throw error;
-    res.send(JSON.stringify(results));
-    return results;
-  });
+  //cria um usuário genérico
+    await dbconfig.makeTables();
+    await clientModel.createUser('Teste', 'teste@teste.com', 'teste');
+  var users = await clientModel.getUsers();
+    res.send(users);
 });
 
 

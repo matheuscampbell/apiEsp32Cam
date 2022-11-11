@@ -2,9 +2,106 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3d4b0d4-1783-4979-a008-8983da77665b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../controller/FaceController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/InteressesController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../controller/apiFuncitions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Conn.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Dispositivos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Faces.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Interesses.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Lojas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Notifications.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Products.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/Reconhecimentos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/configDataBase.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/db/database.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/db/facedetection_api.db" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../model/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/css/Nunito.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-brands-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-brands-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-brands-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-brands-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-brands-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-regular-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-regular-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-regular-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-regular-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-regular-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-solid-900.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-solid-900.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-solid-900.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-solid-900.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fa-solid-900.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/fontawesome-all.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXV3I6Li01BKofIMeaBXso.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXV3I6Li01BKofINeaB.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXV3I6Li01BKofIO-aBXso.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXV3I6Li01BKofIOOaBXso.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXV3I6Li01BKofIOuaBXso.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXX3I6Li01BKofIMNaDRs4.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXX3I6Li01BKofIMNaHRs71cA.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXX3I6Li01BKofIMNaMRs71cA.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXX3I6Li01BKofIMNaNRs71cA.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/fonts/s/nunito/v25/XRXX3I6Li01BKofIMNaORs71cA.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/img/avatars/avatar1.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/img/avatars/avatar2.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/img/avatars/avatar3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/img/avatars/avatar4.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/img/avatars/avatar5.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/img/dogs/image2.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/img/dogs/image3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/js/bs-init.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/js/chart.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/assets/js/theme.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/dispositivos.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/header.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/javascripts/cliente.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/javascripts/clientes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/javascripts/constants.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/javascripts/dispositivos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/javascripts/produtos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/lojas.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/adm/produtos.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/assets/js/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/images/119-1668154909323esp32-cam.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/images/119-1668154949969esp32-cam.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/images/7531506f8f8617d156851660310904980.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/cookies.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/domain.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/localStorage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/login.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/notifications.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/produtos.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/ui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../public/javascripts/user.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/banco.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bks/faceEncoding.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bks/faceRecognition.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../routes/admin.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../routes/store-.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/dataBaseConn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bin/dbFunctions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/admin.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/adm/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/assets/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../public/assets/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/cliente.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/adm/cliente.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/clientes.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/adm/clientes.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../public/adm/footer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/faceEncoding.py" beforeDir="false" afterPath="$PROJECT_DIR$/faceEncoding.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/faceRecognition.py" beforeDir="false" afterPath="$PROJECT_DIR$/faceRecognition.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routes/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../routes/uploadImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../routes/uploadImage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,15 +132,16 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/PucMinas/apiEsp32Cam/python"
+    "last_opened_file_path": "D:/PucMinas/apiEsp32Cam/python/bks"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\PucMinas\apiEsp32Cam\python\bks" />
       <recent name="D:\PucMinas\apiEsp32Cam\python" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.faceEncoding">
     <configuration name="faceDetection" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -66,8 +164,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="faceEncoding" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/faceEncoding.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.faceEncoding" />
         <item itemvalue="Python.faceDetection" />
       </list>
     </recent_temporary>
@@ -83,6 +204,7 @@
       <workItem from="1662764058893" duration="2550000" />
       <workItem from="1662768744202" duration="307000" />
       <workItem from="1666925253466" duration="2485000" />
+      <workItem from="1668034459397" duration="4206000" />
     </task>
     <servers />
   </component>
@@ -101,6 +223,7 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/python$faceEncoding.coverage" NAME="faceEncoding Coverage Results" MODIFIED="1668158542591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/python$faceDetection.coverage" NAME="faceDetection Coverage Results" MODIFIED="1662764154588" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

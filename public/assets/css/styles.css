@@ -68,13 +68,9 @@ corprincipal {
   cursor: pointer;
   height: 300px;
   z-index: 10000;
-  background-image: url("../../assets/img/WBT_6165.jpg");
   transition: background-image 0.3s ease;
 }
 
-.productImage:hover {
-  background-image: url("../../assets/img/WBT_5858.jpg");
-}
 
 @media screen and (min-width: 992px) {
   .productImage {

@@ -1,148 +1,146 @@
 var express = require('express');
 var router = express.Router();
-const { exec } = require("child_process");
-var db = require('../bin/dbFunctions');
+var api = require('../controller/apiFuncitions');
+var users = require('../model/users');
+var faceRecognition = require('../controller/FaceController');
+const notificacoes = require("../model/Notifications");
+const produtos = require("../model/Products");
 
-const msRest = require("@azure/ms-rest-js");
-const Face = require("@azure/cognitiveservices-face");
-const { v4: uuid } = require('uuid');
+router.post('/login',  async function(req, res, next) {
+  var token = api.getToken(req);
+    if (token) {
+      const user =await users.getUserByToken(token);
+        if (user) {
+          res.send({status: 200, message: 'User is already logged in'});
+        }
+    }else {
+      const email = req.body.email;
+        const password = req.body.password;
+        const [user] = await users.getUserByEmail(email);
+        if (user) {
+            if (user.password == password) {
+                const token = api.generateToken();
+                await users.setUserToken(user.id, token);
+                res.send({status: 200, message: 'Login successful', token: token});
+            }else {
+                res.send({status: 401, message: 'Invalid password'});
+            }
+        }
+    }
+});
 
-const key = "f01907b503ed418c95a15078e4497770";
-const endpoint = "https://iot2-puc.cognitiveservices.azure.com/";
+router.post('/register', async function(req, res, next) {
+  var nome, email, password;
+    nome = req.body.nome;
+    email = req.body.email;
+    password = req.body.password;
+    var token = api.generateToken();
+    if(users.getUserByEmail(email).length > 0) {
+        res.send({status: 401, message: 'Email already registered'});
 
-const credentials = new msRest.ApiKeyCredentials({ inHeader: { 'Ocp-Apim-Subscription-Key': key } });
-const client = new Face.FaceClient(credentials, endpoint);
+    }else {
+        var user = await users.createUser(nome, email, password, token);
+        if (user) {
+            res.send({status: 200, message: 'User registered successfully', token: token});
+        } else {
+            res.send({status: 401, message: 'Error registering user'});
+        }
+    }
+});
 
+router.post('/uploadUserImage', async function(req, res, next) {
+var token = api.getToken(req);
+    if (token) {
+        const user =await users.getUserByToken(token);
+            if (user) {
+            var image = req.body.image;
+                var uniqueId = api.generateUniqueId();
+                var image_extension = api.getImageExtension(image);
+                var image_name = uniqueId + image_extension;
+                var image_path = 'public/images/' + image_name;
+                var image_url = '/userImage/' + image_name;
+                var base64Data = image.replace(/^data:image\/png;base64,/, "");
+                fs.writeFile(image_path, base64Data, 'base64', async function (err) {
+                  if (err) {
+                    console.log(err);
+                  } else {
+                    console.log("Image saved");
+                    const hasFace = await faceRecognition.hasFaceInImage(image_path);
+                    if(hasFace != 'true'){
+                      res.send({status: 401, message: 'No face found in image'});
+                    }else{
+                      users.setUserImage(user.id, image_name);
+                      users.addUserImage(user.id, image_name);
+                      res.send({status: 200, message: 'Image uploaded successfully', image: image_url});
+                    }
+                  }
+                });
+                res.send({status: 200, message: 'Image uploaded successfully', image_url: image_url});
+            }else {
+            res.send({status: 401, message: 'Invalid token'});
+            }
+    }
+});
 
-
-router.post('/user-image-upload/:idUser', function(req, res, next) {
-  var  depositId = req.params.departmentId;
-  var uniqueId = Date.now();
-  const { imageFile } = req.files;
-  if (!imageFile) return res.sendStatus(400);
-  var fileName = __dirname+'/'+depositId+'-'+uniqueId+ imageFile.name;
-  imageFile.mv(fileName);
-  exec("python ./python/faceDetection.py " +fileName, (error, stdout, stderr) => {
-    console.log(`stdout: ${stdout}`);
-    db.
-     res.send(stdout);
-  });
+router.get('/logout', async function(req, res, next) {
+    var token = api.getToken(req);
+        if (token) {
+            await users.deleteUserByToken(token);
+            res.send({status: 200, message: 'Logout successful'});
+        }else {
+            res.send({status: 401, message: 'User is not logged in'});
+        }
 });
 
 
-
-async function DetectFaceRecognize(url) {
-  // Detect faces from image URL. Since only recognizing, use the recognition model 4.
-  // We use detection model 3 because we are only retrieving the qualityForRecognition attribute.
-  // Result faces with quality for recognition lower than "medium" are filtered out.
-  let detected_faces = await client.face.detectWithUrl(url,
-      {
-        detectionModel: "detection_03",
-        recognitionModel: "recognition_04",
-        returnFaceAttributes: ["QualityForRecognition"]
-      });
-  return detected_faces.filter(face => face.faceAttributes.qualityForRecognition == 'high' || face.faceAttributes.qualityForRecognition == 'medium');
-}
-
-
-async function WaitForPersonGroupTraining(person_group_id) {
-  // Wait so we do not exceed rate limits.
-  console.log ("Waiting 10 seconds...");
-  await sleep (10000);
-  let result = await client.personGroup.getTrainingStatus(person_group_id);
-  console.log("Training status: " + result.status + ".");
-  if (result.status !== "succeeded") {
-    await WaitForPersonGroupTraining(person_group_id);
-  }
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function AddFacesToPersonGroup(person_dictionary, person_group_id) {
-  console.log ("Adding faces to person group...");
-  // The similar faces will be grouped into a single person group person.
-
-  await Promise.all (Object.keys(person_dictionary).map (async function (key) {
-    const value = person_dictionary[key];
-
-    // Wait briefly so we do not exceed rate limits.
-    await sleep (2000);
-
-    let person = await client.personGroupPerson.create(person_group_id, { name : key });
-    console.log("Create a persongroup person: " + key + ".");
-
-    // Add faces to the person group person.
-    await Promise.all (value.map (async function (similar_image) {
-      // Check if the image is of sufficent quality for recognition.
-      let sufficientQuality = true;
-      let detected_faces = await client.face.detectWithUrl(image_base_url + similar_image,
-          {
-            returnFaceAttributes: ["QualityForRecognition"],
-            detectionModel: "detection_03",
-            recognitionModel: "recognition_03"
-          });
-      detected_faces.forEach(detected_face => {
-        if (detected_face.faceAttributes.qualityForRecognition != 'high'){
-          sufficientQuality = false;
+router.get('/getUserByToken', async function(req, res, next) {
+    var token = api.getToken(req);
+        if (token) {
+        const [user] = await users.getUserByToken(token);
+            if (user) {
+            res.send({status: 200, message: 'User is already logged in', user: user});
+            }
+        }else {
+        res.send({status: 401, message: 'User is not logged in'});
         }
-      });
-
-      // Quality is sufficent, add to group.
-      if (sufficientQuality){
-        console.log("Add face to the person group person: (" + key + ") from image: " + similar_image + ".");
-        await client.personGroupPerson.addFaceFromUrl(person_group_id, person.personId, image_base_url + similar_image);
-      }
-    }));
-  }));
-
-  console.log ("Done adding faces to person group.");
-}
-
-async function IdentifyInPersonGroup() {
-  console.log("========IDENTIFY FACES========");
-  console.log();
-
-// Create a dictionary for all your images, grouping similar ones under the same key.
-  const person_dictionary = {
-    "Family1-Dad" : ["Family1-Dad1.jpg", "Family1-Dad2.jpg"],
-    "Family1-Mom" : ["Family1-Mom1.jpg", "Family1-Mom2.jpg"],
-    "Family1-Son" : ["Family1-Son1.jpg", "Family1-Son2.jpg"],
-    "Family1-Daughter" : ["Family1-Daughter1.jpg", "Family1-Daughter2.jpg"],
-    "Family2-Lady" : ["Family2-Lady1.jpg", "Family2-Lady2.jpg"],
-    "Family2-Man" : ["Family2-Man1.jpg", "Family2-Man2.jpg"]
-  };
-
-  // A group photo that includes some of the persons you seek to identify from your dictionary.
-  let source_image_file_name = "identification1.jpg";
+});
 
 
-  // Create a person group.
-  console.log("Creating a person group with ID: " + person_group_id);
-  await client.personGroup.create(person_group_id, person_group_id, {recognitionModel : "recognition_04" });
+router.get('/produtos', async function(req, res, next) {
+    var token = api.getToken(req);
+        if (token) {
+        const user = await users.getUserByToken(token);
+            if (user) {
+               const prods = await produtos.getProductsForUser(user.id);
+               if(prods){
+                res.send({status: 200, message: 'Products found', produtos: prods});
+               }else{
+                res.send({status: 401, message: 'No products found'});
+               }
+            }
+        }else {
+            res.send({status: 401, message: 'User is not logged in'});
+        }
+});
 
-  await AddFacesToPersonGroup(person_dictionary, person_group_id);
-
-  // Start to train the person group.
-  console.log();
-  console.log("Training person group: " + person_group_id + ".");
-  await client.personGroup.train(person_group_id);
-
-  await WaitForPersonGroupTraining(person_group_id);
-  console.log();
-
-  // Detect faces from source image url and only take those with sufficient quality for recognition.
-  let face_ids = (await DetectFaceRecognize(image_base_url + source_image_file_name)).map (face => face.faceId);
-  // Identify the faces in a person group.
-  let results = await client.face.identify(face_ids, { personGroupId : person_group_id});
-  await Promise.all (results.map (async function (result) {
-    let person = await client.personGroupPerson.get(person_group_id, result.candidates[0].personId);
-    console.log("Person: " + person.name + " is identified for face in: " + source_image_file_name + " with ID: " + result.faceId + ". Confidence: " + result.candidates[0].confidence + ".");
-  }));
-  console.log();
-}
-
+//notificações
+router.get('/notifications', async function(req, res, next) {
+var token = api.getToken(req);
+        if (token) {
+        const user = await users.getUserByToken(token);
+            if (user) {
+               const nots = await notificacoes.getNotificationsForUser(user.id);
+               if(nots){
+                res.send({status: 200, message: 'Notifications found', notificacoes: nots});
+                notificacoes.readNotificationUser(user.id);
+               }else{
+                res.send({status: 401, message: 'No notifications found'});
+               }
+            }
+        }else {
+            res.send({status: 401, message: 'User is not logged in'});
+        }
+});
 
 
 

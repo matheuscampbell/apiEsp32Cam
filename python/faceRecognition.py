@@ -3,14 +3,20 @@ import sys
 import json
 
 # json to array conversion
+import banco
+from bks.faceRecognition import allFaces
 
-allFaces = json.loads(sys.argv[1])
-faceToRecognition = json.loads(sys.argv[2])
-tolerance = float(sys.argv[3])
-results = face_recognition.compare_faces(allFaces, faceToRecognition, tolerance)
+banco = banco.Banco()
 
-if True in results:
-    sys.exit(results.index(True))
-else:
-    sys.exit(False)
+images = banco.getReconhecimentoToRecognize()
+
+allFaces = banco.getAllImageVectorFaces()
+
+for image in images:
+    results = face_recognition.compare_faces(allFaces, image[9], 80)
+    if True in results:
+        r = images[results.index(True)][1]
+        banco.updateReconhecimentoUser(image[0], r)
+    else:
+        banco.updateReconhecimentoUser(image[0], 0)
 
