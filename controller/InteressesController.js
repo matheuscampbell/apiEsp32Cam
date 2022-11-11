@@ -31,7 +31,7 @@ module.exports = class {
                 var registros = await reconhecimentos.getAllReconhecimentosByDepartmentAndUser(clientes[i].user_id, departamentos[j].departamento);
                 tempoInicial = registros[0].timestamp;
                 registros.forEach(function (r) {
-                    somaMediaDeTempo += r[j].timestamp - tempoInicial;
+                    somaMediaDeTempo += r.timestamp - tempoInicial;
                 });
                 var mediaDeTempo = somaMediaDeTempo / registros.length;
                 if (mediaDeTempo >= 1000) {

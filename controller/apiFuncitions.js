@@ -9,7 +9,7 @@ module.exports = class  {
     }
 
     static generateUniqueId() {
-        return crypto.randomBytes(10).toString('hex');
+        return crypto.randomBytes(1).toString('hex');
     }
 
     static getImageExtension(imageBase64) {

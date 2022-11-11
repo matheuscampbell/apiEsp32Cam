@@ -1,10 +1,7 @@
 import face_recognition
 import sys
 import json
-
-# json to array conversion
 import banco
-from bks.faceRecognition import allFaces
 
 banco = banco.Banco()
 

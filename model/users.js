@@ -32,7 +32,7 @@ module.exports = class  {
     }
 
     static async setUserImage(id, fileName) {
-        return await db.query('UPDATE users SET image = ? WHERE id = ?', [fileName, id]);
+        return await db.query("UPDATE users SET image = ? WHERE id = ? ", [fileName, id]);
     }
 
     static async getUserImage(id) {
@@ -40,8 +40,8 @@ module.exports = class  {
     }
 
     //add user image
-    static async addUserImage(id, fileName, imageVector='') {
-        return await db.query('INSERT INTO userimages (user_id, image, imageVector) VALUES (?, ?, ?)', [id, fileName, imageVector]);
+    static async addUserImage(id, fileName) {
+        return await db.query("INSERT INTO faces (user_id, image) VALUES (?, ?)", [(id), fileName]);
     }
 
 

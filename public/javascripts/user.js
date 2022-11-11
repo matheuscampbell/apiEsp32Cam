@@ -30,25 +30,42 @@ function getUser(){
 
 function uploadImage(){
     var token = readCookie("token");
-    var file = document.getElementById("file").files[0];
-    var data = new FormData();
-    data.append('file', file);
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", APIURL+"/uploadUserImage", true);
-    xhr.setRequestHeader('Authorization', token);
-    xhr.send(data);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var user = JSON.parse(xhr.responseText);
-            //user image
-            var userImage = document.getElementById("userImage");
-            if(user.image){
-                userImage.src = "/uploads/"+user.image;
-            }
-            //save in local storage
-            localStorage.setItem("user", JSON.stringify(user));
-        }else{
-            alert("Falha ao enviar imagem");
-        }
+    var file = document.getElementById("upfoto");
+    if(file == null){
+        alert("Insira uma imagem");
+        return;
     }
+    file = file.files[0];
+    var dataf = new FormData();
+    dataf.append('imageFile', file);
+
+    $.ajax({
+        url: APIURL + '/uploadUserImage',
+        type: 'POST',
+        dataType: 'json',
+        data: dataf,
+        processData: false,
+        contentType: false,
+        headers:{
+            "Authorization":token
+        },
+        success: function (data) {
+            console.log(data);
+            if (data.status == 200) {
+                var userImage = document.getElementById("userImage");
+                if(data.image){
+                    userImage.src = "/uploads/"+data.image;
+                }
+                location.reload();
+            } else {
+                alert("Imagem Não aceita");
+            }
+        },
+        error: function (data) {
+            alert("Erro ao adicionar imagem");
+        }
+    });
+
+
+
 }

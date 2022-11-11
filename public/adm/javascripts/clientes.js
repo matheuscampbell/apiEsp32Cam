@@ -30,7 +30,7 @@ function htmlUser(user){
     var html = `
     <tr>
                                     <td style="cursor:pointer" onclick="location.href='/adm/cliente.html?id=${user.id}'"><img class="rounded-circle me-2" width="30" height="30"
-                                             src="${user.image}">${user.name}
+                                             src="/images/${user.image}">${user.name}
                                     </td>
                                     <td>${user.loja??"Não Cadastrado"}</td>
                                     <td>${user.email}</td>

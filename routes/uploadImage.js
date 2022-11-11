@@ -29,10 +29,11 @@ router.post('/:idDispositivo', async function(req, res, next) {
     imageFile.mv(fileName);
       exec("python ./python/faceDetection.py " + fileName, async (error, stdout, stderr) => {
       console.log(`stdout: ${stdout}`);
-      if (stdout == "false") {
+      if (stdout.split('false').length > 1) {
         fs.unlinkSync(fileName);
       } else {
-        await modelReconhecimento.addReconhecimento(dispositivo.id,dispositivo.loja, dispositivo.produto, dispositivo.department, imageName);
+        console.log("dispositivo: ", dispositivo);
+        await modelReconhecimento.addReconhecimento(dispositivo.id,dispositivo.loja??0, dispositivo.produto??0, dispositivo.departamento??0, imageName);
       }
       res.send('ok');
     });

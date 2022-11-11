@@ -115,7 +115,7 @@ router.post('/addDispositivo', async function(req, res, next) {
 
 router.delete('/deleteDispositivo/:id', async function(req, res, next) {
     var id = req.params.id;
-    var dispositivo = await Dispositivos.deleteDispositivo(id);
+    var dispositivo = await Dispositivos.removeDispositivo(id);
     if(dispositivo){
         res.send({status: 200, message: 'success', dispositivo:dispositivo});
     }else {

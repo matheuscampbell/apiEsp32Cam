@@ -12,7 +12,7 @@ module.exports = class  {
         return await db.query('SELECT * FROM dispositivos WHERE mac = ?', [mac]);
     }
 
-    static async removeDispositivo(mac){
-        return await db.query('DELETE FROM dispositivos WHERE mac = ?', [mac]);
+    static async removeDispositivo(id){
+        return await db.query('DELETE FROM dispositivos WHERE id = ?', [id]);
     }
 }

@@ -82,7 +82,7 @@ function getProdutos(){
         success: function(result) {
             if(result.status == 200){
                 var produtos = result.produtos;
-                var html = '';
+                var html = '<option value="0">Nenhum</option>';
                 produtos.forEach(produto => {
                     html += '<option value="'+produto.id+'">'+produto.name+'</option>';
                 });

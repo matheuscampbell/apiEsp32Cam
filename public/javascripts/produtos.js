@@ -7,8 +7,9 @@ function getProducts() {
             'Authorization': readCookie("token")
         },
         success: function (data) {
-            if(data.status == 200 && data.produtos.length > 0) {
-                data.produtos.foreach(function (produto) {
+            if(data.produtos.length > 0) {
+                data.produtos.forEach(function (produto) {
+                    console.log(produto);
                     UinovoProduto(produto);
                 });
             }
@@ -24,9 +25,13 @@ function getDepartamentos() {
         url: APIURL+'/departamentos',
         type: 'GET',
         dataType: 'json',
+        headers: {
+            'Authorization': readCookie("token")
+        },
         success: function (data) {
-            if(data.status == 200 && data.departamentos.length > 0) {
-                data.departamentos.foreach(function (departamento) {
+            console.log(data);
+            if(data.departamentos.length > 0) {
+                data.departamentos.forEach(function (departamento) {
                     UinovoDepartamento(departamento);
                 });
             }

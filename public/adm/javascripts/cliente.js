@@ -18,7 +18,7 @@ function getCliente() {
                 $('#nome').html(cliente.name);
                 $('#email').html(cliente.email);
                 $('#loja').html(cliente.loja);
-                $('#image').attr('src', cliente.image);
+                $('#clienteImg').attr('src', '/images/'+cliente.image);
             }
         },
         error: function (data) {
@@ -53,7 +53,7 @@ function getClienteReconhecimentos() {
 function htmlReconhecimento(reconhecimento) {
     var html = `
     <tr>
-        <td>${reconhecimento.id}<img class="rounded-circle me-2" width="30" height="30" src="${reconhecimento.image}"></td>
+        <td>${reconhecimento.id}<img class="rounded-circle me-2" width="30" height="30" src="/images/${reconhecimento.image}"></td>
         <td>${reconhecimento.loja}</td>
         <td>${reconhecimento.departamento}</td>
         <td>${reconhecimento.produto}</td>
@@ -69,7 +69,7 @@ function getDepartamentos() {
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            var departamentos = data.departamentos;
+            var departamentos = data.interesses;
             if (departamentos) {
                 var html = '';
                 departamentos.forEach(function (departamento) {
@@ -87,7 +87,7 @@ function getDepartamentos() {
 function htmlDepartamento(departamento) {
     var html = `
         <tr>
-            <td>${departamento.nome}</td>
+            <td>${departamento.name}</td>
             </tr>
     `;
     return html;
@@ -101,7 +101,7 @@ function getProdutosCliente(){
         dataType: 'json',
         success: function (data) {
             console.log(data);
-            var produtos = data.produtos;
+            var produtos = data.interesses;
             if (produtos) {
                 var html = '';
                 produtos.forEach(function (produto) {
@@ -119,8 +119,8 @@ function getProdutosCliente(){
 function htmlProduto(produto) {
     var html = `
         <tr>
-            <td><img src="${produto.image}" class="rounded-circle me-2" width="30" height="30"></td>
-            <td>${produto.nome}</td>
+            <td><img src="/images/${produto.image}" class="rounded-circle me-2" width="30" height="30"></td>
+            <td>${produto.name}</td>
             </tr>
     `;
     return html;
